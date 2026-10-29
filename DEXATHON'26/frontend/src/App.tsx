@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Activity, ArrowDownRight, ArrowUpRight, BookOpen, CalendarDays, CheckCircle2, ClipboardList, GraduationCap, LayoutDashboard, LoaderCircle, PanelLeftClose, PanelLeftOpen, Settings2, ShieldCheck, Users, Workflow } from 'lucide-react'
 import ModuleWorkspace from './ModuleWorkspace'
+import { apiUrl } from './api'
 
 type User = { id: number; username: string; display_name: string; role: string; active: boolean; capabilities: string[] }
 type School = { id: number; name: string; academic_year: string; working_days: string[]; periods_per_day: number; settings: Record<string, unknown> }
@@ -36,7 +37,7 @@ export default function App() {
   const [notice, setNotice] = useState('')
 
   async function request<T>(path: string, init: RequestInit = {}, identity = userName): Promise<T> {
-    const response = await fetch(path, { ...init, headers: { 'Content-Type': 'application/json', 'X-Demo-User': identity, ...init.headers } })
+    const response = await fetch(apiUrl(path), { ...init, headers: { 'Content-Type': 'application/json', 'X-Demo-User': identity, ...init.headers } })
     if (!response.ok) {
       const body = await response.json().catch(() => null)
       throw new Error(body?.detail || `Request failed (${response.status})`)
@@ -48,7 +49,7 @@ export default function App() {
     setError('')
     try {
       const [dbHealth, account, config] = await Promise.all([
-        fetch('/api/health').then(async r => { if (!r.ok) throw new Error('Backend health check failed'); return r.json() }),
+        fetch(apiUrl('/api/health')).then(async r => { if (!r.ok) throw new Error('Backend health check failed'); return r.json() }),
         request<User[]>('/api/users', {}, identity),
         request<School>('/api/school', {}, identity),
       ])
