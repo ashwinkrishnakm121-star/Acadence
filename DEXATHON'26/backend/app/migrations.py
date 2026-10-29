@@ -19,4 +19,5 @@ def upgrade_question_marking_fields(engine: Engine) -> None:
         if "evaluations" in tables:
             existing = {column["name"] for column in inspector.get_columns("evaluations")}
             if "answers_reviewed_at" not in existing:
-                connection.exec_driver_sql("ALTER TABLE evaluations ADD COLUMN answers_reviewed_at DATETIME NULL")
+                column_type = "TIMESTAMP WITH TIME ZONE" if engine.dialect.name == "postgresql" else "DATETIME"
+                connection.exec_driver_sql(f"ALTER TABLE evaluations ADD COLUMN answers_reviewed_at {column_type} NULL")
