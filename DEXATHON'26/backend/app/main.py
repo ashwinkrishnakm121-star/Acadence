@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
+import os
 
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
@@ -25,6 +27,17 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(title="Acadence API", version="0.1.0", lifespan=lifespan)
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv("ACADENCE_ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+    if origin.strip()
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_methods=["GET", "POST", "PUT", "OPTIONS"],
+    allow_headers=["Content-Type", "X-Demo-User"],
+)
 app.include_router(assessment_router)
 app.include_router(evaluation_router)
 app.include_router(platform_router)
