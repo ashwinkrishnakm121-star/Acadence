@@ -29,6 +29,12 @@ npm run dev
 
 The Vite development server proxies `/api` requests to the backend at `http://127.0.0.1:8010`.
 
+## Vercel demo deployment
+
+Deploy this repository as one Vercel project. The root `vercel.json` defines a `backend` FastAPI service and a `frontend` Vite service. Requests under `/api/` go to the backend; all other paths go to the frontend. The frontend uses same-origin `/api` requests, so the Vercel rewrite connects it to the backend without a cross-origin URL or service binding.
+
+Set `ACADENCE_DATABASE_URL` to a persistent PostgreSQL connection string (for example, from Neon) in the Vercel project environment. The backend refuses to start on Vercel if only its local SQLite default is configured. `ACADENCE_DATABASE_URL` accepts PostgreSQL URLs beginning with `postgres://` or `postgresql://`. The API's demo-user selector is not production authentication: use demo data only and do not expose real student records.
+
 ## Demo accounts
 
 Select one of the seeded demo users in the interface. The selected username is sent as `X-Demo-User` and resolved against the database for each protected request. This is a prototype capability mechanism, not production authentication.
