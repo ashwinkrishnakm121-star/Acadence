@@ -117,7 +117,7 @@ export default function App() {
         {visibleSection === 'School settings' && school && <SchoolSettings school={school} canEdit={can('school:write')} saving={saving} onSave={saveSettings} />}
         {visibleSection === 'Users & capabilities' && <UserManagement users={users} canEdit={can('users:write')} saving={saving} onSave={saveUser} onCreate={createUser} />}
         {visibleSection === 'Activity' && <ActivityView events={events} allowed={can('audit:read')} />}
-        {['Timetable generation', 'Assessment Studio', 'Academic Planner', 'Examination evaluation', 'Academic coordination'].includes(visibleSection) && currentUser && <ModuleWorkspace section={visibleSection as any} user={currentUser} school={school} onRefresh={() => void refresh()} />}
+        {['Timetable generation', 'Assessment Studio', 'Academic Planner', 'Examination evaluation', 'Academic coordination'].includes(visibleSection) && currentUser && <ModuleWorkspace section={visibleSection} user={currentUser} request={request} onRefresh={() => void refresh()} />}
       </div>
     </main>
   </div>
