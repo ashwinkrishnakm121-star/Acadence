@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 250" fill="none">
+  <g transform="translate(30 25) scale(8)" stroke="#5b4b8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" opacity=".12">
+    <path d="m2 10 10-5 10 5-10 5-10-5Z"/>
+    <path d="M22 10v6M6 12v5c3.3 2.7 8.7 2.7 12 0v-5"/>
+  </g>
+  <text x="250" y="163" fill="#5b4b8a" fill-opacity=".095" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="98" font-weight="650" letter-spacing="-5">acadence</text>
+</svg>
