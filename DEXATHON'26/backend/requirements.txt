@@ -4,3 +4,4 @@ sqlalchemy>=2.0,<3
 pydantic>=2.8,<3
 ortools>=9.10,<10
 reportlab>=4.2,<5
+psycopg[binary]>=3.2,<4
