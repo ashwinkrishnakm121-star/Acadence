@@ -1,25 +1,25 @@
 :root {
   color-scheme: light;
-  --canvas: #f5f2f8;
+  --canvas: #f4f7fb;
   --surface: #fff;
-  --surface-subtle: #f8f6fb;
-  --ink: #28263a;
-  --ink-soft: #48465b;
-  --muted: #6d6a7a;
-  --quiet: #817d8d;
-  --line: #e5e0e7;
-  --line-strong: #d1cbd8;
-  --accent: #5b4b8a;
-  --accent-hover: #493a75;
-  --accent-soft: #f0edf7;
+  --surface-subtle: #f4f7fb;
+  --ink: #29384d;
+  --ink-soft: #344d6e;
+  --muted: #5579a3;
+  --quiet: #7a99bc;
+  --line: #d1dcec;
+  --line-strong: #a8bdd8;
+  --accent: #d4915a;
+  --accent-hover: #c17a42;
+  --accent-soft: #fbf0e7;
   --success: #246b4b;
   --warning: #805a16;
   --danger: #a34139;
   --radius-sm: 7px;
   --radius-md: 11px;
-  --shadow-soft: 0 2px 10px rgb(45 39 59 / 5%);
-  --focus-ring: 0 0 0 3px rgb(91 75 138 / 22%);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --shadow-soft: 0 1px 3px rgb(0 0 0 / 5%), 0 4px 12px -2px rgb(0 0 0 / 4%);
+  --focus-ring: 0 0 0 3px rgb(85 121 163 / 22%);
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 15px;
   line-height: 1.5;
   color: var(--ink);
@@ -34,10 +34,10 @@ button, input, select, textarea { font: inherit; }
 button { cursor: pointer; }
 button:disabled, input:disabled, select:disabled, textarea:disabled { cursor: not-allowed; }
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-::selection { color: #33274f; background: #e4dcef; }
+::selection { color: #29384d; background: #d1dcec; }
 
 .app-frame { min-height: 100vh; background: var(--canvas); }
-.sidebar { width: 258px; padding: 22px 15px 14px; background: #fbfafe; border-color: var(--line); transition: width .18s ease; }
+.sidebar { width: 240px; padding: 22px 15px 14px; background: #fbfafe; border-color: var(--line); transition: width .18s ease; }
 .brand { gap: 11px; padding: 0 8px 21px; }
 .brand-mark { width: 38px; height: 38px; border-radius: 10px; background: var(--accent); color: white; box-shadow: none; }
 .brand-copy { min-width: 0; }
@@ -63,7 +63,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .user-mini b { color: var(--ink-soft); font-size: 11px; }
 .user-mini small { color: var(--muted); font-size: 10px; }
 .user-mini > svg { flex: 0 0 auto; color: var(--accent); }
-.main-area { min-width: 0; margin-left: 258px; background-color: var(--canvas); background-image: url('/acadence-watermark.svg'); background-repeat: no-repeat; background-size: clamp(320px, 42vw, 560px) auto; background-position: center center; background-attachment: fixed; }
+.main-area { min-width: 0; margin-left: 240px; background-color: var(--canvas); background-image: url('/acadence-watermark.svg'); background-repeat: no-repeat; background-size: clamp(320px, 42vw, 560px) auto; background-position: center center; background-attachment: fixed; }
 .sidebar-collapsed .sidebar { width: 92px; padding-inline: 10px; }
 .sidebar-collapsed .main-area { margin-left: 92px; }
 .sidebar-collapsed .brand { justify-content: center; gap: 0; padding-inline: 0; }
@@ -288,4 +288,74 @@ td { color: var(--ink-soft); font-size: 12px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* Visual system adapted from the supplied Acadence live UI reference. */
+.sidebar { background: #1a2433; border-right-color: #29384d; }
+.brand-mark { background: linear-gradient(135deg, #d4915a, #c17a42); box-shadow: 0 1px 3px rgb(0 0 0 / 12%); }
+.brand strong { color: #fff; text-transform: capitalize; }
+.brand span { color: #a8bdd8; }
+.sidebar-toggle { color: #a8bdd8; }
+.sidebar-toggle:hover { border-color: #344d6e; background: rgb(255 255 255 / 7%); color: white; }
+.school-switch { background: #202e41; border-color: #2e425b; color: #a8bdd8; }
+.school-avatar, .sidebar .user-mini .avatar { background: #344d6e; color: #fff; }
+.school-name b, .user-mini b { color: #e8eef6; }
+.school-name small, .user-mini small { color: #a8bdd8; }
+.sidebar .nav-caption { color: #7a99bc; }
+.sidebar .nav-item, .sidebar .module-item { color: #c2cedd; }
+.sidebar .nav-item:hover, .sidebar .module-item:hover { background: rgb(255 255 255 / 6%); color: white; }
+.sidebar .nav-item.active { background: rgb(255 255 255 / 9%); color: white; }
+.sidebar .module-item.selected { background: rgb(212 145 90 / 15%); color: #f1bd96; }
+.sidebar .nav-item .active-dot { background: #e8a87c; }
+.sidebar .user-mini { border-color: #344255; }
+.sidebar .user-mini > svg { color: #e8a87c; }
+.sidebar-collapsed .sidebar-toggle { color: #c2cedd; }
+.main-area { margin-left: 240px; }
+.topbar { min-height: 56px; height: 56px; padding-inline: 24px; background: white; border-bottom-color: #d1dcec; }
+.breadcrumb { color: #29384d; font-size: 15px; font-weight: 600; letter-spacing: -.15px; }
+.school-top-context { display: flex; align-items: baseline; gap: 7px; color: #5579a3; font-size: 12px; white-space: nowrap; }
+.school-top-name { color: #344d6e; font-weight: 600; }
+.school-top-year { color: #7a99bc; }
+.topbar-divider { background: #d1dcec; }
+.topbar select { border-color: #d1dcec; color: #344d6e; }
+.page-content { padding-top: 26px; }
+.eyebrow { color: #5579a3; font-size: 13px; letter-spacing: 0; font-weight: 400; }
+.page-heading h1 { color: #29384d; font-size: clamp(21px, 1.8vw, 26px); letter-spacing: -.4px; }
+.page-heading p { color: #5579a3; font-size: 13px; }
+.panel, .metric-card, .workflow-card, .module-panel, .module-toolbar { border-color: #d1dcec; border-radius: 12px; box-shadow: 0 1px 3px rgb(0 0 0 / 5%), 0 4px 12px -2px rgb(0 0 0 / 4%); }
+.panel-heading { padding-bottom: 12px; border-bottom: 1px solid #e8eef6; margin-bottom: 15px; }
+.panel-heading h2, .module-panel-heading h2 { color: #2e425b; font-size: 14px; }
+.panel-heading p, .module-panel-heading p { color: #5579a3; }
+.metric-card strong { color: #344d6e; }
+.workflow-card { background: white; }
+.workflow-card:hover { border-color: #a8bdd8; background: #fbfcfe; }
+.workflow-icon, .metric-icon.blue, .metric-icon.violet, .metric-icon.green, .metric-icon.orange { background: #e8eef6; color: #5579a3; }
+.workflow-open, .text-button, .icon-button { color: #c17a42; }
+.primary-button, .small-primary { background: #344d6e; }
+.primary-button:hover:not(:disabled), .small-primary:hover:not(:disabled) { background: #29384d; }
+.light-button, .danger-button { border-color: #d1dcec; }
+.module-toolbar { background: white; }
+.module-toolbar b { color: #29384d; }
+.module-toolbar span { color: #5579a3; }
+.module-panel-heading { border-bottom: 1px solid #e8eef6; padding-bottom: 12px; }
+.module-field input, .module-field select, .module-field textarea, .field input,
+.section-requirement input, .section-requirement select, .setup-form-row input, .setup-form-row select,
+.task-update-form input, .task-update-form select, .paper-question select, .lesson-edit select {
+  border-color: #d1dcec; color: #344d6e; background-color: white;
+}
+.module-field input:focus, .module-field textarea:focus, .module-field select:focus, .field input:focus { border-color: #7a99bc; }
+.table-wrap, .class-schedule-grid { border-color: #d1dcec; }
+th, .class-schedule-grid thead th, .class-schedule-grid tbody th { background: #f4f7fb; color: #5579a3; }
+td, th, .class-schedule-grid th, .class-schedule-grid td { border-color: #e8eef6; }
+.status-badge { border-radius: 6px; }
+.status-approved, .status-published, .status-completed, .status-accepted { background: #e9f5ee; color: #256649; }
+.status-submitted, .status-in-progress { background: #eaf1fa; color: #3f5f87; }
+.status-rejected, .status-failed { background: #fceceb; color: #a34139; }
+.status-changes-requested, .status-unsupported { background: #fbf0e7; color: #865323; }
+.evaluation-total, .foundation-note { border-color: #cfe4d7; background: #f3faf5; }
+
+@media (max-width: 760px) {
+  .topbar { min-height: auto; height: auto; }
+  .topbar-right { align-items: center; }
+  .school-top-context { white-space: normal; }
 }
