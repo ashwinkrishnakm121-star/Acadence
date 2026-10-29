@@ -211,6 +211,12 @@ Suggested areas for verification include:
 - Examination mark validation, teacher confirmation, and persistence.
 - Authentication and permission enforcement.
 
+## Vercel deployment
+
+The repository-root `vercel.json` configures a single Vercel project with a FastAPI backend service and a Vite frontend service. Requests under `/api/` route to the backend; all other paths route to the frontend. Leave `VITE_API_BASE_URL` unset in the Vercel project so the browser uses the same-origin `/api` routes. The Vercel Python runtime is documented as Beta.
+
+The backend currently defaults to SQLite stored alongside its source. Vercel function filesystems are not persistent storage, so use a persistent database and configure the backend to connect to it before relying on deployed data. Do not deploy real student records using the demo-user selector, which is not production authentication.
+
 ## Future Development
 
 Potential future improvements include:
