@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { ArrowDown, ArrowUp, Check, CircleAlert, FileDown, LoaderCircle, Plus, RefreshCw, Save, Sparkles, WandSparkles } from 'lucide-react'
 import './module.css'
 import EvaluationWorkspace from './EvaluationWorkspace'
+import { apiUrl } from './api'
 
 type DemoUser = { id: number; username: string; display_name: string; role: string; capabilities: string[] }
 type ApiRequest = <T>(path: string, init?: RequestInit, identity?: string) => Promise<T>
@@ -138,7 +139,7 @@ function AssessmentWorkspace({ user, request }: Props) {
   async function downloadPdf() {
     if (!selected) return
     setBusy(true); setError('')
-    try { const res = await fetch(`/api/assessments/${selected.id}/pdf`, { headers: { 'X-Demo-User': user.username } }); if (!res.ok) throw new Error((await res.json()).detail || `Download failed (${res.status})`); const url = URL.createObjectURL(await res.blob()); const anchor = document.createElement('a'); anchor.href = url; anchor.download = `assessment-${selected.id}.pdf`; anchor.click(); URL.revokeObjectURL(url); setNotice('Approved assessment PDF downloaded.') }
+    try { const res = await fetch(apiUrl(`/api/assessments/${selected.id}/pdf`), { headers: { 'X-Demo-User': user.username } }); if (!res.ok) throw new Error((await res.json()).detail || `Download failed (${res.status})`); const url = URL.createObjectURL(await res.blob()); const anchor = document.createElement('a'); anchor.href = url; anchor.download = `assessment-${selected.id}.pdf`; anchor.click(); URL.revokeObjectURL(url); setNotice('Approved assessment PDF downloaded.') }
     catch (e) { setError(e instanceof Error ? e.message : 'PDF download failed.') } finally { setBusy(false) }
   }
   async function loadVersions() {
